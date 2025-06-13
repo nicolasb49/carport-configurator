@@ -8,11 +8,39 @@ st.set_page_config(page_title="Carport Konfigurator")
 style_path = Path(__file__).parent / "style.css"
 st.markdown(f"<style>{style_path.read_text()}</style>", unsafe_allow_html=True)
 
+# Header configuration
+LOGO_URL = (
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/"
+    "Hornbach_Logo.svg/1200px-Hornbach_Logo.svg.png"
+)
+
+HEADER_STYLE = """
+<style>
+.hb-header {
+    background-color: var(--color-primary);
+    width: 100%;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+}
+.hb-header h1 {
+    color: white;
+    margin: 0 0 0 1rem;
+}
+</style>
+"""
+
+st.markdown(HEADER_STYLE, unsafe_allow_html=True)
+st.markdown("<div class='hb-header'>", unsafe_allow_html=True)
+header_col1, header_col2 = st.columns([1, 5])
+header_col1.image(LOGO_URL, width=120)
+header_col2.markdown("<h1>Carport Konfigurator</h1>", unsafe_allow_html=True)
+st.markdown("</div>", unsafe_allow_html=True)
+
 MATERIAL_OPTIONS = ["Holz", "Aluminium", "Stahl"]
 ROOF_OPTIONS = ["Flachdach", "Satteldach", "Walmdach"]
 PV_OPTIONS = ["Mono", "Poly", "Glas-Glas"]
-
-st.title("Carport Konfigurator")
 
 with st.form("config_form"):
     col1, col2 = st.columns(2)
