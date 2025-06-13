@@ -42,30 +42,28 @@ MATERIAL_OPTIONS = ["Holz", "Aluminium", "Stahl"]
 ROOF_OPTIONS = ["Flachdach", "Satteldach", "Walmdach"]
 PV_OPTIONS = ["Mono", "Poly", "Glas-Glas"]
 
-with st.form("config_form"):
-    col1, col2 = st.columns(2)
-    with col1:
+with st.sidebar:
+    with st.form("config_form"):
         material = st.selectbox(
             "Material",
             MATERIAL_OPTIONS,
             key="material",
         )
-    with col2:
         roof_shape = st.selectbox(
             "Dachform",
             ROOF_OPTIONS,
             key="roof_shape",
         )
-    pv_modules = st.multiselect(
-        "PV-Module",
-        PV_OPTIONS,
-        key="pv_modules",
-    )
-    postal_code = st.text_input(
-        "Postleitzahl",
-        key="postal_code",
-    )
-    submitted = st.form_submit_button("Berechnen")
+        pv_modules = st.multiselect(
+            "PV-Module",
+            PV_OPTIONS,
+            key="pv_modules",
+        )
+        postal_code = st.text_input(
+            "Postleitzahl",
+            key="postal_code",
+        )
+        submitted = st.form_submit_button("Berechnen", use_container_width=True)
 
 if submitted:
     payload = {
