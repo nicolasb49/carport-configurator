@@ -1,12 +1,24 @@
 import streamlit as st
 import httpx
 from pathlib import Path
+import base64
 
 st.set_page_config(page_title="Carport Konfigurator")
 
 # Load and apply Hornbach theme
 style_path = Path(__file__).parent / "style.css"
 st.markdown(f"<style>{style_path.read_text()}</style>", unsafe_allow_html=True)
+
+# Load icons as base64 strings
+icon_dir = Path(__file__).parent / "assets" / "icons"
+
+def load_icon(name: str) -> str:
+    return base64.b64encode((icon_dir / name).read_bytes()).decode()
+
+ICON_MATERIAL = load_icon("material.svg")
+ICON_ROOF = load_icon("roof.svg")
+ICON_PV = load_icon("pv.svg")
+ICON_POSTAL = load_icon("postal_code.svg")
 
 # Header configuration
 LOGO_URL = (
@@ -44,24 +56,44 @@ PV_OPTIONS = ["Mono", "Poly", "Glas-Glas"]
 
 with st.sidebar:
     with st.form("config_form"):
+        st.markdown(
+            f"<label class='icon-label'><img src='data:image/svg+xml;base64,{ICON_MATERIAL}' width='20'> Material</label>",
+            unsafe_allow_html=True,
+        )
         material = st.selectbox(
-            "Material",
+            "",
             MATERIAL_OPTIONS,
             key="material",
+            label_visibility="collapsed",
+        )
+        st.markdown(
+            f"<label class='icon-label'><img src='data:image/svg+xml;base64,{ICON_ROOF}' width='20'> Dachform</label>",
+            unsafe_allow_html=True,
         )
         roof_shape = st.selectbox(
-            "Dachform",
+            "",
             ROOF_OPTIONS,
             key="roof_shape",
+            label_visibility="collapsed",
+        )
+        st.markdown(
+            f"<label class='icon-label'><img src='data:image/svg+xml;base64,{ICON_PV}' width='20'> PV-Module</label>",
+            unsafe_allow_html=True,
         )
         pv_modules = st.multiselect(
-            "PV-Module",
+            "",
             PV_OPTIONS,
             key="pv_modules",
+            label_visibility="collapsed",
+        )
+        st.markdown(
+            f"<label class='icon-label'><img src='data:image/svg+xml;base64,{ICON_POSTAL}' width='20'> Postleitzahl</label>",
+            unsafe_allow_html=True,
         )
         postal_code = st.text_input(
-            "Postleitzahl",
+            "",
             key="postal_code",
+            label_visibility="collapsed",
         )
         submitted = st.form_submit_button("Berechnen", use_container_width=True)
 
