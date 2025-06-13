@@ -19,7 +19,7 @@ Dieses Projekt bietet eine einfache Basis, um eine Webanwendung zur Konfiguratio
 
 Backend starten mit uvicorn:
 ```bash
-uvicorn backend.main:app --reload
+uvicorn backend.app:app --reload
 ```
 
 Frontend über Streamlit starten:
