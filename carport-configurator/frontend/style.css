@@ -67,3 +67,12 @@ div[data-testid='stSidebar'] button {
     width: 100%;
     font-size: 1.2rem;
 }
+
+/* Result cards styling */
+.card {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}

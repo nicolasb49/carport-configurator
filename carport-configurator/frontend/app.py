@@ -81,4 +81,63 @@ if submitted:
 
 if "result" in st.session_state:
     st.subheader("Ergebnis")
-    st.json(st.session_state["result"])
+    result = st.session_state["result"]
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown(
+            f"""
+            <div class="card">
+                <h3>Optimale Neigung</h3>
+                <p>{result['optimal_tilt']}°</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            f"""
+            <div class="card">
+                <h3>Drainage-Optionen</h3>
+                <p>{', '.join(result['drainage_options'])}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    with col2:
+        st.markdown(
+            f"""
+            <div class="card">
+                <h3>Ertrag</h3>
+                <p>{result['estimated_yield']}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            f"""
+            <div class="card">
+                <h3>Fundament-Optionen</h3>
+                <p>{', '.join(result['foundation_options'])}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    import urllib.parse
+
+    query = urllib.parse.urlencode(
+        {
+            "material": result["material"],
+            "roof_shape": result["roof_shape"],
+            "pv_modules": result["pv_modules"],
+            "postal_code": result["postal_code"],
+        },
+        doseq=True,
+    )
+    download_url = f"http://localhost:8000/download?{query}"
+    st.markdown(
+        f'<a href="{download_url}"><button>PDF herunterladen</button></a>',
+        unsafe_allow_html=True,
+    )
