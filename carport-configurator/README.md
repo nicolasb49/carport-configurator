@@ -24,6 +24,25 @@ uvicorn backend.app:app --reload
 
 Frontend über Streamlit starten:
 ```bash
-streamlit run frontend/main.py
+streamlit run frontend/app.py
 ```
+
+## Docker
+
+Die Anwendung kann auch komplett in einem Container gebaut und gestartet werden.
+
+Zum Erstellen des Images im Projektverzeichnis ausführen:
+
+```bash
+docker build -t carport-configurator .
+```
+
+Anschließend lässt sich der Container starten:
+
+```bash
+docker run -p 8000:8000 -p 8501:8501 carport-configurator
+```
+
+Das Backend ist dann unter `http://localhost:8000` erreichbar und das
+Frontend unter `http://localhost:8501`.
 
