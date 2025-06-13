@@ -1,0 +1,39 @@
+:root {
+    --color-primary: #F26621;
+    --color-secondary: #000000;
+    --font-family-base: Arial, sans-serif;
+}
+
+body {
+    font-family: var(--font-family-base);
+    background-color: #ffffff;
+    color: var(--color-secondary);
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-primary);
+    margin-top: 0;
+}
+
+p {
+    color: var(--color-secondary);
+    line-height: 1.6;
+}
+
+button, .stButton > button {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover, .stButton > button:hover {
+    background-color: #d95b1c;
+}
+
+.stApp {
+    background-color: #f5f5f5;
+}

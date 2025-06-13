@@ -1,7 +1,12 @@
 import streamlit as st
 import httpx
+from pathlib import Path
 
 st.set_page_config(page_title="Carport Konfigurator")
+
+# Load and apply Hornbach theme
+style_path = Path(__file__).parent / "style.css"
+st.markdown(f"<style>{style_path.read_text()}</style>", unsafe_allow_html=True)
 
 MATERIAL_OPTIONS = ["Holz", "Aluminium", "Stahl"]
 ROOF_OPTIONS = ["Flachdach", "Satteldach", "Walmdach"]
